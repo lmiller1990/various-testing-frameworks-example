@@ -8,6 +8,10 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@cypress/vue": "^3.0.1",
+    "@cypress/webpack-dev-server": "^1.3.1",
+    "@testing-library/vue": "^6.4.2",
+    "cypress": "^7.4.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
