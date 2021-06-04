@@ -1,50 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/vue'
 import { expect } from  'chai'
 import FormValidation from '../../src/FormValidation.vue'
-
-describe('FormValidation', () => {
-  it('fills out form correctly', async () => {
-    render(FormValidation)
-
-    await fireEvent.update(screen.getByLabelText('Name'), 'lachlan') 
-    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
-    await fireEvent.update(screen.getByLabelText('Weight'), '150')
-
-    expect(screen.queryByRole('error')).to.eq(null)
-  })
-
-  it('shows errors for invalid inputs', async () => {
-    render(FormValidation)
-
-    await fireEvent.update(screen.getByLabelText('Name'), '')
-    await fireEvent.update(screen.getByLabelText('Weight'), '5')
-    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
-
-    expect(screen.getAllByRole('error')).to.have.length(2)
-  })
-
-  it('emits a submit event with patientForm when valid form submitted', async () => {
-    const { emitted } = render(FormValidation)
-
-    await fireEvent.update(screen.getByLabelText('Name'), 'lachlan')
-    await fireEvent.update(screen.getByLabelText('Weight'), '150')
-    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
-    await fireEvent.click(screen.getByText('Submit'))
-
-    expect(emitted().submit[0]).to.eql([
-      {
-        patient: {
-          name: 'lachlan',
-          weight: {
-            value: 150,
-            units: 'lb'
-          }
-        }
-      }
-    ])
-  })
-})
-
 import { mount } from '@vue/test-utils'
 
 describe('FormValidation', () => {
@@ -83,6 +39,50 @@ describe('FormValidation', () => {
           weight: {
             value: 100,
             units: 'kg'
+          }
+        }
+      }
+    ])
+  })
+})
+
+
+describe('FormValidation', () => {
+  it('fills out form correctly', async () => {
+    render(FormValidation)
+
+    await fireEvent.update(screen.getByLabelText('Name'), 'lachlan') 
+    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
+    await fireEvent.update(screen.getByLabelText('Weight'), '150')
+
+    expect(screen.queryByRole('error')).to.eq(null)
+  })
+
+  it('shows errors for invalid inputs', async () => {
+    render(FormValidation)
+
+    await fireEvent.update(screen.getByLabelText('Name'), '')
+    await fireEvent.update(screen.getByLabelText('Weight'), '5')
+    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
+
+    expect(screen.getAllByRole('error')).to.have.length(2)
+  })
+
+  it('emits a submit event with patientForm when valid form submitted', async () => {
+    const { emitted } = render(FormValidation)
+
+    await fireEvent.update(screen.getByLabelText('Name'), 'lachlan')
+    await fireEvent.update(screen.getByLabelText('Weight'), '150')
+    await fireEvent.update(screen.getByDisplayValue('kg'), 'lb')
+    await fireEvent.click(screen.getByText('Submit'))
+
+    expect(emitted().submit[0]).to.eql([
+      {
+        patient: {
+          name: 'lachlan',
+          weight: {
+            value: 150,
+            units: 'lb'
           }
         }
       }
