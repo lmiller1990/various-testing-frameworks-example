@@ -1,24 +1,7 @@
-# many-vue-testing-frameworks
+Demo project showing off various testing libraries/frameworks.
 
-## Project setup
-```
-yarn install
-```
+- unit tests: mocha + chai
+- component tests: Test Utils, Vue Testing Library, Cypress
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `yarn cypress open-ct` for Cypress
+- `yarn test:unit` for everything else
